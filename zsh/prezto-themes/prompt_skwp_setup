@@ -12,63 +12,115 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Yan Pritzker <yan@pritzker.ws>
 
+# Colors vary depending on time lapsed.
+if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%F{118}"
+ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%F{166}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%F{161}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%F{81}"
+else
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%F{green}"
+ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%F{yellow}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%F{red}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%F{cyan}"
+fi
+function git_time_since_commit() {
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    if [[ $(git log 2>&1 > /dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
+      last_commit=`git log --pretty=format:'%at' -1 2> /dev/null`
+        now=`date +%s`
+        seconds_since_last_commit=$((now-last_commit))
+
+        MINUTES=$((seconds_since_last_commit / 60))
+        HOURS=$((seconds_since_last_commit/3600))
+
+        DAYS=$((seconds_since_last_commit / 86400))
+        SUB_HOURS=$((HOURS % 24))
+        SUB_MINUTES=$((MINUTES % 60))
+
+        if [[ -n $(git status -s 2> /dev/null) ]]; then
+          if [ "$HOURS" -gt 3 ]; then
+            COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG"
+          elif [ "$HOURS" -gt 1 ]; then
+            COLOR="$ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM"
+          else
+            COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT"
+              fi
+        else
+          COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
+            fi
+
+            if [ "$HOURS" -gt 24 ]; then
+              echo "($COLOR${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m%{$reset_color%}"
+            elif [ "$MINUTES" -gt 60 ]; then
+              echo "($COLOR${HOURS}h${SUB_MINUTES}m%{$reset_color%}"
+            else
+              echo "($COLOR${MINUTES}m%{$reset_color%}"
+                fi
+    else
+      COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
+        echo "($COLOR~|"
+        fi
+        fi
+}
+
 function prompt_skwp_precmd {
   setopt LOCAL_OPTIONS
-  unsetopt XTRACE KSH_ARRAYS
+    unsetopt XTRACE KSH_ARRAYS
 
-  # Get Git repository information.
-  if (( $+functions[git-info] )); then
-    git-info on
-    git-info
-  fi
+# Get Git repository information.
+    if (( $+functions[git-info] )); then
+      git-info on
+        git-info
+        fi
 
-  # Get ruby information
-  if (( $+functions[ruby-info] )); then
-    ruby-info
-  fi
+# Get ruby information
+        if (( $+functions[ruby-info] )); then
+          ruby-info
+            fi
 }
 
 function prompt_skwp_setup {
   setopt LOCAL_OPTIONS
-  unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
+    unsetopt XTRACE KSH_ARRAYS
+    prompt_opts=(cr percent subst)
 
-  autoload -Uz add-zsh-hook
+    autoload -Uz add-zsh-hook
 
-  add-zsh-hook precmd prompt_skwp_precmd
+    add-zsh-hook precmd prompt_skwp_precmd
 
-  # Use extended color pallete if available.
-  if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
-    __PROMPT_SKWP_COLORS=(
-      "%F{81}"  # turquoise
-      "%F{166}" # orange
-      "%F{135}" # purple
-      "%F{161}" # hotpink
-      "%F{118}" # limegreen
-    )
-  else
-    __PROMPT_SKWP_COLORS=(
-      "%F{cyan}"
-      "%F{yellow}"
-      "%F{magenta}"
-      "%F{red}"
-      "%F{green}"
-    )
-  fi
+# Use extended color pallete if available.
+    if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+      __PROMPT_SKWP_COLORS=(
+          "%F{81}"  # turquoise
+          "%F{166}" # orange
+          "%F{135}" # purple
+          "%F{161}" # hotpink
+          "%F{118}" # limegreen
+          )
+    else
+      __PROMPT_SKWP_COLORS=(
+          "%F{cyan}"
+          "%F{yellow}"
+          "%F{magenta}"
+          "%F{red}"
+          "%F{green}"
+          )
+        fi
 
-  # git
-  zstyle ':prezto:module:git:info:branch' format "${__PROMPT_SKWP_COLORS[1]}%b%f"
-  zstyle ':prezto:module:git:info:added' format "${__PROMPT_SKWP_COLORS[5]}●%f"
-  zstyle ':prezto:module:git:info:deleted' format "${__PROMPT_SKWP_COLORS[2]}●%f"
-  zstyle ':prezto:module:git:info:modified' format "${__PROMPT_SKWP_COLORS[4]}●%f"
-  zstyle ':prezto:module:git:info:untracked' format "${__PROMPT_SKWP_COLORS[3]}●%f"
-  zstyle ':prezto:module:git:info:keys' format 'prompt' '(%b%d%a%m%u)'
+# git
+        zstyle ':prezto:module:git:info:branch' format "${__PROMPT_SKWP_COLORS[1]}%b%f"
+        zstyle ':prezto:module:git:info:added' format "${__PROMPT_SKWP_COLORS[5]}●%f"
+        zstyle ':prezto:module:git:info:deleted' format "${__PROMPT_SKWP_COLORS[2]}●%f"
+        zstyle ':prezto:module:git:info:modified' format "${__PROMPT_SKWP_COLORS[4]}●%f"
+        zstyle ':prezto:module:git:info:untracked' format "${__PROMPT_SKWP_COLORS[3]}●%f"
+        zstyle ':prezto:module:git:info:keys' format 'prompt' ' %b%d%a%m%u)'
 
-  # ruby info (rvm, rbenv)
-  zstyle ':prezto:module:ruby:info:version' format '[%v]'
+# ruby info (rvm, rbenv)
+        zstyle ':prezto:module:ruby:info:version' format '[%v]'
 
-  PROMPT="${__PROMPT_SKWP_COLORS[3]}%n%f@${__PROMPT_SKWP_COLORS[2]}%m%f ${__PROMPT_SKWP_COLORS[5]}%~%f "'$git_info[prompt]'"$ "
-  RPROMPT='%F{blue}${ruby_info[version]}'
+        PROMPT="${__PROMPT_SKWP_COLORS[3]}%n%f@${__PROMPT_SKWP_COLORS[2]}%m%f ${__PROMPT_SKWP_COLORS[5]}%~%f "'$(git_time_since_commit)''$git_info[prompt]'"$ "
+        RPROMPT='%F{blue}${ruby_info[version]}'
 }
 
 prompt_skwp_setup "$@"

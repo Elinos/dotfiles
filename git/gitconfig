@@ -111,7 +111,7 @@
 [core]
   autocrlf = false
   editor = vim
-  excludesfile = ~/.yadr/git/gitignore
+	excludesfile = /Users/ktsarnakliyski/.yadr/git/gitignore
 [advice]
   statusHints = false
 [diff]
@@ -125,3 +125,20 @@
   enabled = true
 [include]
   path = .gitconfig.user
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.4/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[init]
+	templatedir = /Users/ktsarnakliyski/.git-templates
+[user]
+	name = Kiril Tsarnakliyski
+	email = ktsarnakliyski@gmail.com
+[credential]
+	helper = osxkeychain
+[github]
+	user = Elinos
+[ghi]
+	token = 6fc335f5fae1d3df5474d7080ba1dd82bac5e8e9

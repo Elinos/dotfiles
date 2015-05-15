@@ -48,7 +48,6 @@ alias ae='vim $yadr/zsh/aliases.zsh' #alias edit
 alias ar='source $yadr/zsh/aliases.zsh'  #alias reload
 
 # vim using
-alias vim="/Users/ktsarnakliyski/Applications/MacVim.app/Contents/MacOS/Vim"
 mvim --version > /dev/null 2>&1
 MACVIM_INSTALLED=$?
 if [ $MACVIM_INSTALLED -eq 0 ]; then
@@ -59,7 +58,7 @@ fi
 alias :q='exit'
 
 # vimrc editing
-alias ve='vim ~/.vimrc'
+alias ve='vim ~/.yadr/vim/after/.vimrc.after'
 
 # zsh profile editing
 alias ze='vim ~/.zshrc'
@@ -130,7 +129,7 @@ alias tf='tail -f'
 alias l='less'
 alias lh='ls -alt | head' # see the last modified files
 alias screen='TERM=screen screen'
-alias cl='clear'
+alias c='clear'
 
 # Zippin
 alias gz='tar -zcvf'
@@ -150,9 +149,7 @@ alias k9='kill -9'
 alias sgi='sudo gem install --no-ri --no-rdoc'
 
 # TODOS
-# This uses NValt (NotationalVelocity alt fork) - http://brettterpstra.com/project/nvalt/
-# to find the note called 'todo'
-alias todo='open nvalt://find/todo'
+alias t='task'
 
 # Forward port 80 to 3000
 alias portforward='sudo ipfw add 1000 forward 127.0.0.1,3000 ip from any to any 80 in'
@@ -194,6 +191,11 @@ alias dbmu='spring rake db:migrate:up'
 # Homebrew
 alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
 
+#FASD
+alias v='f -e vim'
 
-#Personal
-alias c='clear'
+#Find in current directory
+alias ff='find . -iname'
+
+#Geeknote in Vim
+alias vgn='vi -c Geeknote'
