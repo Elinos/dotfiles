@@ -141,4 +141,4 @@
 [github]
 	user = Elinos
 [ghi]
-	token = 6fc335f5fae1d3df5474d7080ba1dd82bac5e8e9
+	token = !security find-internet-password -a Elinos -s github.com -l 'ghi token' -w
