@@ -127,7 +127,8 @@ alias grb='git recent-branches'
 #Alias hub to git
 alias git='hub'
 alias gpr='hub pull-request'
-
+#Delete all branches merged to this one
+alias gdmb='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 # Common shell functions
 alias less='less -r'
 alias tf='tail -f'
