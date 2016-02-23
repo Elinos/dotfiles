@@ -134,8 +134,8 @@
 [init]
 	templatedir = /Users/ktsarnakliyski/.git-templates
 [user]
-	name = 
-	email = 
+	name =Kiril Tsarnakliyski
+	email = ktsarnakliyski@gmail.com
 [credential]
 	helper = osxkeychain
 [github]
