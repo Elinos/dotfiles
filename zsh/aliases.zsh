@@ -41,7 +41,7 @@ elif [[ $platform == 'darwin' ]]; then
 fi
 
 # show me files matching "ls grep"
-alias lsg='ll | grep'
+alias lsg='ll | grep -i'
 
 # Alias Editing
 alias ae='vim $yadr/zsh/aliases.zsh' #alias edit
@@ -122,6 +122,11 @@ alias gsmu='git submodule update'
 alias gt='git t'
 alias gbg='git bisect good'
 alias gbb='git bisect bad'
+alias grp='git remote prune origin'
+alias grb='git recent-branches'
+#Alias hub to git
+alias git='hub'
+alias gpr='hub pull-request'
 
 # Common shell functions
 alias less='less -r'
@@ -130,6 +135,7 @@ alias l='less'
 alias lh='ls -alt | head' # see the last modified files
 alias screen='TERM=screen screen'
 alias c='clear'
+alias rmr='rm -rf'
 
 # Zippin
 alias gz='tar -zcvf'
@@ -175,9 +181,6 @@ alias sp='sprintly'
 # spb = sprintly branch - create a branch automatically based on the bug you're working on
 alias spb="git checkout -b \`sp | tail -2 | grep '#' | sed 's/^ //' | sed 's/[^A-Za-z0-9 ]//g' | sed 's/ /-/g' | cut -d"-" -f1,2,3,4,5\`"
 
-alias hpr='hub pull-request'
-alias grb='git recent-branches'
-
 # Finder
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
@@ -195,7 +198,22 @@ alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew d
 alias v='f -e vim'
 
 #Find in current directory
-alias ff='find . -iname'
+alias ff='function _ff(){find . -iname "*$1*";};_ff'
 
 #Geeknote in Vim
 alias vgn='vi -c Geeknote'
+
+#The fuck
+alias fuck='$(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+
+#Count of most used commands
+alias topc="history 1 | awk '{a[\$2]++}END{for(i in a){print a[i] \" \" i}}' | sort -rn | head -n20"
+
+#htop remap
+alias htop='sudo htop'
+
+#Copy last command
+alias copyLastCmd="fc -ln -1 | sed '1s/^[[:space:]]*//' | awk 1 ORS="" | pbcopy "
+
+#Searchi in aliases
+alias sia='function _sia(){grep "$1" ~/.yadr/zsh/aliases.zsh ;};_sia'

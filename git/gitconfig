@@ -134,11 +134,20 @@
 [init]
 	templatedir = /Users/ktsarnakliyski/.git-templates
 [user]
-	name = Kiril Tsarnakliyski
-	email = ktsarnakliyski@gmail.com
+	name = 
+	email = 
 [credential]
 	helper = osxkeychain
 [github]
 	user = Elinos
 [ghi]
+[ghi]
+[ghi]
 	token = !security find-internet-password -a Elinos -s github.com -l 'ghi token' -w
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[pager]
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
