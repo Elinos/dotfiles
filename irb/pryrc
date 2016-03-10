@@ -70,6 +70,13 @@ end
 
 Pry.config.commands.import default_command_set
 
+#Awesome print
+begin
+  require 'awesome_print'
+  Pry.config.print = proc { |output, value| output.puts value.ai }
+rescue LoadError => err
+  puts "no awesome_print :("
+end
 
 # === CONVENIENCE METHODS ===
 # Stolen from https://gist.github.com/807492

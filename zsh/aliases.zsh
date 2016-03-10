@@ -24,9 +24,14 @@ alias psa="ps aux"
 alias psg="ps aux | grep "
 alias psr='ps aux | grep ruby'
 
+#List open ports
+alias lop='sudo lsof -i -n -P | grep LISTEN'
+
 # Moving around
 alias cdb='cd -'
 alias cls='clear;ls'
+#Common commands remaps
+alias md='mkdir'
 
 # Show human friendly numbers and colors
 alias df='df -h'
@@ -53,6 +58,9 @@ MACVIM_INSTALLED=$?
 if [ $MACVIM_INSTALLED -eq 0 ]; then
   alias vim="mvim -v"
 fi
+
+#Map Vim
+alias v='vim'
 
 # mimic vim functions
 alias :q='exit'
@@ -83,6 +91,7 @@ alias ga='git add -A'
 alias guns='git unstage'
 alias gunc='git uncommit'
 alias gm='git merge'
+alias gma='git merge --abort'
 alias gms='git merge --squash'
 alias gam='git amend --reset-author'
 alias grv='git remote -v'
@@ -111,6 +120,7 @@ alias gplr='git pull --rebase'
 alias gps='git push'
 alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
 alias gnb='git nb' # new branch aka checkout -b
+alias gdb='git branch -d'
 alias grs='git reset'
 alias grsh='git reset --hard'
 alias gcln='git clean'
@@ -196,7 +206,7 @@ alias dbmu='spring rake db:migrate:up'
 alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
 
 #FASD
-alias v='f -e vim'
+alias vv='f -e vim'
 
 #Find in current directory
 alias ff='function _ff(){find . -iname "*$1*";};_ff'

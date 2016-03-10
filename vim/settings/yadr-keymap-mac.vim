@@ -21,12 +21,12 @@ imap <silent> <D-D> -
 " Change inside various enclosures with Cmd-" and Cmd-'
 " The f makes it find the enclosure so you don't have
 " to be standing inside it
-nnoremap <D-'> f'ci'
-nnoremap <D-"> f"ci"
-nnoremap <D-(> f(ci(
-nnoremap <D-)> f)ci)
-nnoremap <D-[> f[ci[
-nnoremap <D-]> f]ci]
+nnoremap æ f'ci'
+nnoremap Æ f"ci"
+nnoremap · f(ci(
+nnoremap ‚ f)ci)
+nnoremap “ f[ci[
+nnoremap ‘ f]ci]
 
 " ==== NERD tree
 " Cmd-Shift-N for nerd tree
@@ -34,18 +34,18 @@ nmap <F4> :NERDTreeToggle<CR>
 
 " move up/down quickly by using Cmd-j, Cmd-k
 " which will move us around by functions
-nnoremap <silent> <D-j> }
-nnoremap <silent> <D-k> {
-autocmd FileType ruby map <buffer> <D-j> ]m
-autocmd FileType ruby map <buffer> <D-k> [m
-autocmd FileType rspec map <buffer> <D-j> }
-autocmd FileType rspec map <buffer> <D-k> {
-autocmd FileType javascript map <buffer> <D-k> }
-autocmd FileType javascript map <buffer> <D-j> {
+nnoremap <silent> ∆ }
+nnoremap <silent> ˚  {
+autocmd FileType ruby map <buffer> ∆ ]m
+autocmd FileType ruby map <buffer> ˚  [m
+autocmd FileType rspec map <buffer> ∆ }
+autocmd FileType rspec map <buffer> ˚  {
+autocmd FileType javascript map <buffer> ∆  }
+autocmd FileType javascript map <buffer> ˚ {
 
 " Command-/ to toggle comments
-map <D-/> :TComment<CR>
-imap <D-/> <Esc>:TComment<CR>i
+map ÷ :TComment<CR>
+imap ÷ <Esc>:TComment<CR>i
 
 " Use numbers to pick the tab you want (like iTerm)
 map <silent> <D-1> :tabn 1<cr>
@@ -59,17 +59,17 @@ map <silent> <D-8> :tabn 8<cr>
 map <silent> <D-9> :tabn 9<cr>
 
 " Resize windows with arrow keys
-nnoremap <D-Up> <C-w>+
-nnoremap <D-Down> <C-w>-
-nnoremap <D-Left> <C-w><
-nnoremap <D-Right>  <C-w>>
+nnoremap  <C-w>+
+nnoremap Ô <C-w>-
+nnoremap Ó <C-w><
+nnoremap Ò <C-w>>
 
 " ============================
 " Tabularize - alignment
 " ============================
 " Hit Cmd-Shift-A then type a character you want to align by
-nmap <D-A> :Tabularize /
-vmap <D-A> :Tabularize /
+nmap Å :Tabularize /
+vmap Å :Tabularize /
 
 " Source current file Cmd-% (good for vim development)
-map <D-%> :so %<CR>
+map ﬁ :so %<CR>
