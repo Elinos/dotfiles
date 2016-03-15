@@ -139,6 +139,13 @@ alias git='hub'
 alias gpr='hub pull-request'
 #Delete all branches merged to this one
 alias gdmb='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+#Fuzzy search of branches to checkout
+alias gsb='git branch | cut -c 3- | selecta | xargs git checkout'
+#Fizzy search of files to checkout
+alias gcof='git diff --name-only | selecta | xargs git checkout -- '
+#Fizzy search of files to see diff
+alias gdf='git diff --name-only | selecta | xargs git diff'
+
 # Common shell functions
 alias less='less -r'
 alias tf='tail -f'
@@ -226,5 +233,36 @@ alias htop='sudo htop'
 #Copy last command
 alias copyLastCmd="fc -ln -1 | sed '1s/^[[:space:]]*//' | awk 1 ORS="" | pbcopy "
 
-#Searchi in aliases
+#Search in aliases
 alias sia='function _sia(){grep "$1" ~/.yadr/zsh/aliases.zsh ;};_sia'
+
+#Run last command as admin
+alias pls='sudo $(fc -ln -1)'
+
+#Display lines of code in project
+function loc() {
+  local total
+  local firstletter
+  local ext
+  local lines
+  total=0
+  for ext in $@; do
+    firstletter=$(echo $ext | cut -c1-1)
+    if [[ firstletter != "." ]]; then
+      ext=".$ext"
+    fi
+    lines=`find-exec "*$ext" cat | wc -l`
+    lines=${lines// /}
+    total=$(($total + $lines))
+    echo "Lines of code for ${fg[blue]}$ext${reset_color}: ${fg[green]}$lines${reset_color}"
+  done
+  echo "${fg[blue]}Total${reset_color} lines of code: ${fg[green]}$total${reset_color}"
+}
+
+#Fuzzy select of project
+proj() {
+  cd $(find ~/Programming/GOThree ~/Programming/Playground -maxdepth 1 -type d | selecta)
+}
+
+#Find PID by name
+alias findpid="ps axww -o pid,user,%cpu,%mem,start,time,command | selecta | sed 's/^ *//' | cut -f1 -d' '"
