@@ -143,8 +143,12 @@ alias gdmb='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gsb='git branch | cut -c 3- | selecta | xargs git checkout'
 #Fizzy search of files to checkout
 alias gcof='git diff --name-only | selecta | xargs git checkout -- '
+#Fizzy search of files to reset
+alias grf='git diff --name-only --cached | selecta | xargs git reset'
 #Fizzy search of files to see diff
 alias gdf='git diff --name-only | selecta | xargs git diff'
+#Show diff for last commit
+alias gdl='gd HEAD^ HEAD'
 
 # Common shell functions
 alias less='less -r'
@@ -154,6 +158,7 @@ alias lh='ls -alt | head' # see the last modified files
 alias screen='TERM=screen screen'
 alias c='clear'
 alias rmr='rm -rf'
+alias lf='ls -a | selecta | xargs less'
 
 # Zippin
 alias gz='tar -zcvf'
