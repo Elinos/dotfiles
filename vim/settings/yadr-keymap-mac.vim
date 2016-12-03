@@ -36,8 +36,8 @@ nmap <F4> :NERDTreeToggle<CR>
 " which will move us around by functions
 nnoremap <silent> ∆ }
 nnoremap <silent> ˚  {
-autocmd FileType ruby map <buffer> ∆ ]m
-autocmd FileType ruby map <buffer> ˚  [m
+autocmd FileType ruby map <buffer> ∆ }
+autocmd FileType ruby map <buffer> ˚ {
 autocmd FileType rspec map <buffer> ∆ }
 autocmd FileType rspec map <buffer> ˚  {
 autocmd FileType javascript map <buffer> ∆  }

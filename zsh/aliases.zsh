@@ -35,7 +35,7 @@ alias md='mkdir'
 
 # Show human friendly numbers and colors
 alias df='df -h'
-alias du='du -h -d 2'
+alias du='du -hs'
 
 if [[ $platform == 'linux' ]]; then
   alias ll='ls -alh --color=auto'
@@ -109,6 +109,7 @@ alias gf='git fetch'
 alias gfch='git fetch'
 alias gd='git diff'
 alias gb='git b'
+alias gba='git b -a'
 alias gbd='git b -D -w'
 # Staged and cached are the same thing
 alias gdc='git diff --cached -w'
@@ -170,6 +171,7 @@ alias ts='thin start'
 alias ms='mongrel_rails start'
 alias tfdl='tail -f log/development.log'
 alias tftl='tail -f log/test.log'
+alias rv='rbenv'
 
 alias ka9='killall -9'
 alias k9='kill -9'
